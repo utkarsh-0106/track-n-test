@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | DSA Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="max-w-5xl mx-auto py-12 px-6">
+        <h1 class="text-4xl font-bold mb-6 text-blue-400 text-center">Welcome</h1>
+
+        <!-- DSA Topics -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4 text-green-400">DSA Topics</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+
+                <div th:each="topic : ${dsaTopics}">
+                    <div class="p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-200">
+                        <h3 th:text="${topic.key}" class="text-lg font-semibold text-white mb-2"></h3>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-3">
+                            <!-- Watch Button -->
+                            <a th:href="${topic.value}" target="_blank"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-semibold">
+                                ▶️ Watch
+                            </a>
+
+                            <!-- Quiz Button -->
+                            <a th:href="@{/quiz/{topic}(topic=${topic.key.toLowerCase()})}"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-semibold">
+                                🧠 Take Quiz
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- System Design Topics -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">System Design Topics</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div th:each="topic : ${systemDesignTopics}">
+                    <a th:href="${topic.value}" target="_blank"
+                       class="block p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-200">
+                        <h3 th:text="${topic.key}" class="text-lg font-semibold text-white"></h3>
+                        <p class="text-sm text-gray-400 mt-1">Watch topic on YouTube</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI/ML Topics -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4 text-pink-400">AI / ML Topics</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div th:each="topic : ${aiMlTopics}">
+                    <a th:href="${topic.value}" target="_blank"
+                       class="block p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-200">
+                        <h3 th:text="${topic.key}" class="text-lg font-semibold text-white"></h3>
+                        <p class="text-sm text-gray-400 mt-1">Watch topic on YouTube</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center mt-12">
+            <a href="/logout"
+               class="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition duration-200 font-semibold">
+               Logout
+            </a>
+        </div>
+    </div>
+</body>
+</html>

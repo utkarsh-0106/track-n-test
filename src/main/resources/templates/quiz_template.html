@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${topic} + ' Quiz | DSA Tracker'">Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+<div class="max-w-3xl mx-auto py-12 px-6">
+    <h1 th:text="${topic} + ' Quiz'" class="text-3xl font-bold text-center text-blue-400 mb-8"></h1>
+
+    <form action="/quiz/submit" method="post" class="space-y-6">
+        <div th:each="q : ${questions}" class="bg-gray-800 p-5 rounded-lg shadow-md">
+            <p th:text="'Q' + ${q.id} + '. ' + ${q.question}" class="text-lg font-semibold mb-4"></p>
+
+            <div class="space-y-2">
+                <label class="block">
+                    <input type="radio" th:name="'answer_' + ${q.id}" th:value="${q.optionA}" required>
+                    <span th:text="${q.optionA}"></span>
+                </label>
+                <label class="block">
+                    <input type="radio" th:name="'answer_' + ${q.id}" th:value="${q.optionB}">
+                    <span th:text="${q.optionB}"></span>
+                </label>
+                <label class="block">
+                    <input type="radio" th:name="'answer_' + ${q.id}" th:value="${q.optionC}">
+                    <span th:text="${q.optionC}"></span>
+                </label>
+                <label class="block">
+                    <input type="radio" th:name="'answer_' + ${q.id}" th:value="${q.optionD}">
+                    <span th:text="${q.optionD}"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <button type="submit"
+                    class="px-6 py-2 rounded-lg bg-green-600 hover:bg-green-700 transition duration-200 font-semibold">
+                Submit Quiz
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
